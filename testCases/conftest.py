@@ -1,18 +1,6 @@
 import pytest
 from selenium import webdriver
 
-
-# this will get the value from CLI/hooks
-def pytest_addoption(parser):
-    parser.addoption('--browser')
-
-
-# this will return browser value to 'setup' method
-@pytest.fixture()
-def browser(request):
-    return request.config.getoption('--browser')
-
-
 @pytest.fixture()
 def setup():
     if browser == 'firefox':
@@ -23,6 +11,17 @@ def setup():
         print('Chrome Browser')
 
     return driver
+    
+
+# this will get the value from CLI/hooks
+def pytest_addoption(parser):
+    parser.addoption('--browser')
+
+
+# this will return browser value to 'setup' method
+@pytest.fixture()
+def browser(request):
+    return request.config.getoption('--browser')
 
 
 # ################ pyTest HTML reports ################
